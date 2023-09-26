@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -20,6 +21,12 @@ public class ProductController {
     public ResponseEntity<ProductDTO> getProduct(@PathVariable UUID id){
         ProductDTO productById = productService.findProductById(id);
         return ResponseEntity.ok(productById);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<ProductDTO>> getAllProduct(){
+        List<ProductDTO> allProduct = productService.getAllProduct();
+        return ResponseEntity.ok(allProduct);
     }
 
     @PostMapping

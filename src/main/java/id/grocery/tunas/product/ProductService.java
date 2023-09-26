@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -23,6 +25,15 @@ public class ProductService {
         }
         ProductDTO productDTO = new ProductDTO(productById.getId(), productById.getName(), productById.getPrice(), productById.getDescription(), productById.getStock());
         return productDTO;
+    }
+
+    public List<ProductDTO> getAllProduct(){
+        List<ProductDTO> result = new ArrayList<>();
+        Iterable<Product> all = productRepository.findAll();
+        all.forEach(product -> {
+            result.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getStock()));
+        });
+        return result;
     }
 
     public void saveProduct(AddAndUpdateProductDTO requestBody){

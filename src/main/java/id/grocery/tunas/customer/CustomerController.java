@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -34,5 +35,11 @@ public class CustomerController {
     public ResponseEntity<GetCustomerByIdDTO.Customer> getById(@PathVariable("id") UUID id){
         GetCustomerByIdDTO.Customer customer = customerService.findById(id);
         return ResponseEntity.ok(customer);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<GetCustomerByIdDTO.Customer>> getAllCustomer(){
+        List<GetCustomerByIdDTO.Customer> all = customerService.getAll();
+        return ResponseEntity.ok(all);
     }
 }
